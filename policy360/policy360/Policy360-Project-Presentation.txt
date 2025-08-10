@@ -1,0 +1,96 @@
+Slide 1: Project Introduction
+Policy360 - Secure Insurance Management System
+
+Project Overview: Complete insurance management system with role-based access control
+
+Key Features: Policy management, claim processing, audit logging, automated reminders
+
+Development Status: Fully functional with JWT authentication and encryption
+
+Technology: Spring Boot 3.2, MySQL, JWT, AOP, Bean Validation
+
+Slide 2: System Architecture
+Clean Architecture Implementation
+
+Layer Structure: Controller → Service → Repository → Entity
+
+Security Layer: JWT authentication, role-based authorization
+
+Cross-cutting Concerns: AOP for audit logging, global exception handling
+
+Data Encryption: AES encryption for sensitive PII data
+
+Interface-based Design: Service interfaces with implementations for modularity
+
+Slide 3: Technology Stack
+Modern Spring Boot Ecosystem
+
+Backend: Spring Boot 3.2, Spring Security, Spring Data JPA
+
+Database: MySQL 8.0 with Hibernate ORM
+
+Authentication: JWT tokens with BCrypt password encoding
+
+Build Tool: Maven with dependency management
+
+Development: Java 17, Lombok for boilerplate reduction
+
+Email: Spring Mail with SMTP integration
+
+Slide 4: Database & Entity Design
+Entity Relationship Model
+
+Core Entities: User, Policy, Claim, AuditLog
+
+Role Management: ADMIN, AGENT, CUSTOMER with enum-based roles
+
+Status Tracking: PolicyStatus (ACTIVE, EXPIRED, CANCELLED), ClaimStatus (PENDING, APPROVED, REJECTED)
+
+Data Security: Encrypted storage for email, full name, mobile number
+
+Audit Trail: Complete tracking of all system operations
+
+Slide 5: Security Implementation
+Multi-layered Security Approach
+
+Authentication: JWT tokens with 24-hour expiration
+
+Authorization: Role-based access control (@PreAuthorize annotations)
+
+Data Protection: AES-256 encryption for sensitive fields
+
+Password Security: BCrypt hashing with salt
+
+API Security: Protected endpoints with Bearer token validation
+
+Input Validation: Bean validation with custom error handling
+
+Slide 6: API Endpoints
+RESTful API Design
+
+Authentication: /auth/login - JWT token generation
+
+Policy Management: CRUD operations with role restrictions
+
+Claim Processing: Create, update status, retrieve by various filters
+
+Admin Operations: Audit log access, user management
+
+Error Handling: Global exception handler with consistent error responses
+
+Testing: Complete Postman collection with 30+ test scenarios
+
+Slide 7: Advanced Features
+Enterprise-ready Capabilities
+
+AOP Audit Logging: Automatic tracking of all POST/PUT operations
+
+Scheduled Tasks: Email reminders for pending claims (configurable)
+
+Data Masking: PII protection in API responses
+
+Business Validation: Complex claim validation rules
+
+Pagination: Efficient data retrieval for large datasets
+
+Environment Profiles: Separate configurations for dev/prod

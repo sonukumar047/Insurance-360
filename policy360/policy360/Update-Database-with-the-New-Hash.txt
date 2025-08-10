@@ -1,0 +1,18 @@
+USE policy360;
+
+-- Clear existing users with corrupted hash
+-- DELETE FROM users;
+
+-- Run your application
+
+-- Insert admin user with the new working BCrypt hash
+INSERT INTO users (username, email, full_name, mobile_number, password, role, created_at, is_active) VALUES
+('admin', 'admin@policy360.com', 'System Administrator', '9999999999', '$2a$10$xpVesFfbtVFBXmPCTf8SbeB9eDqrRpmyG8fRu.R9b.NCv1WKKFERC', 'ADMIN', NOW(), TRUE);
+
+-- Add other test users with the same hash
+INSERT INTO users (username, email, full_name, mobile_number, password, role, created_at, is_active) VALUES
+('agent1', 'agent1@policy360.com', 'Insurance Agent One', '9999999998', '$2a$10$xpVesFfbtVFBXmPCTf8SbeB9eDqrRpmyG8fRu.R9b.NCv1WKKFERC', 'AGENT', NOW(), TRUE),
+('customer1', 'customer1@policy360.com', 'John Customer', '9999999997', '$2a$10$xpVesFfbtVFBXmPCTf8SbeB9eDqrRpmyG8fRu.R9b.NCv1WKKFERC', 'CUSTOMER', NOW(), TRUE);
+
+-- Verify the users were inserted correctly
+SELECT id, username, role, is_active FROM users;
