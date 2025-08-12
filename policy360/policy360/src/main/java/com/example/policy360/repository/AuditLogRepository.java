@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 
 @Repository
 public interface AuditLogRepository extends JpaRepository<AuditLog, Long> {
-    Page<AuditLog> findByUsernameOrderByTimestampDesc(String username, Pageable pageable);
-    Page<AuditLog> findByTimestampBetweenOrderByTimestampDesc(
-            LocalDateTime start, LocalDateTime end, Pageable pageable);
-    Page<AuditLog> findByEntityTypeOrderByTimestampDesc(String entityType, Pageable pageable);
+    Page<AuditLog> findByUsername(String username, Pageable pageable);
+    Page<AuditLog> findByTimestampBetween(LocalDateTime start, LocalDateTime end, Pageable pageable);
+    Page<AuditLog> findByEntityType(String entityType, Pageable pageable);
 }

@@ -42,8 +42,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(
-            AuthenticationConfiguration config) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
@@ -51,21 +50,31 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/auth/login", "/auth/register-public").permitAll()  // Allow public access
-                        .requestMatchers("/auth/register").hasRole("ADMIN")  // Admin-only registration
+                        // Public endpoints
+                        .requestMatchers("/auth/login", "/auth/register-public",
+                                "/auth/forgot-password", "/auth/reset-password").permitAll()
+//                        .requestMatchers("/actuator/health", "/actuator/info").permitAll()
+                        .requestMatchers("/actuator/**").permitAll()
+
+                        // Admin only endpoints
+                        .requestMatchers("/auth/register", "/auth/register-agent",
+                                "/auth/activate/**", "/auth/deactivate/**",
+                                "/auth/unlock/**").hasRole("ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/agent/**").hasAnyRole("ADMIN", "AGENT")
+
+                        // Agent and Admin endpoints
+                        .requestMatchers("/auth/register-customer").hasAnyRole("ADMIN", "AGENT")
+                        .requestMatchers("/policy/**").hasAnyRole("ADMIN", "AGENT", "CUSTOMER")
+                        .requestMatchers("/claim/**").hasAnyRole("ADMIN", "AGENT", "CUSTOMER")
+
+                        // All authenticated users
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
-
-
-
 }

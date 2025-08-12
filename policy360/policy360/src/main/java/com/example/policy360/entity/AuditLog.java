@@ -18,20 +18,17 @@ public class AuditLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id")
-    private Long userId;
-
     @Column(name = "username")
     private String username;
 
-    @Column(name = "action", nullable = false)
+    @Column(name = "action")
     private String action;
 
-    @Column(name = "entity_type", nullable = false)
+    @Column(name = "entity_type")
     private String entityType;
 
     @Column(name = "entity_id")
-    private Long entityId;
+    private String entityId;
 
     @Column(name = "details", columnDefinition = "TEXT")
     private String details;

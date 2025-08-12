@@ -1,9 +1,7 @@
 package com.example.policy360.dto;
 
-import com.example.policy360.entity.enums.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterRequest {
+public class PublicRegisterRequest {
 
     @NotBlank(message = "Username is required")
     @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
@@ -34,6 +32,6 @@ public class RegisterRequest {
     @Size(min = 6, max = 100, message = "Password must be at least 6 characters")
     private String password;
 
-    @NotNull(message = "Role is required")
-    private Role role;
+    @NotBlank(message = "Confirm password is required")
+    private String confirmPassword;
 }

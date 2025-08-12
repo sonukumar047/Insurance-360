@@ -1,7 +1,6 @@
 package com.example.policy360.exception;
 
-public class ClaimNotFoundException extends CustomExceptions {
-
+public class ClaimNotFoundException extends RuntimeException {
     public ClaimNotFoundException(String message) {
         super(message);
     }

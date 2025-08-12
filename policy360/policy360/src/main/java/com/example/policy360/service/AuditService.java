@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.time.LocalDateTime;
 
 public interface AuditService {
-    void saveAuditLog(AuditLog auditLog);
+    void saveAuditLog(String username, String action, String entityType, String entityId, String details, String ipAddress);
     Page<AuditLog> getAllAuditLogs(Pageable pageable);
     Page<AuditLog> getAuditLogsByUsername(String username, Pageable pageable);
     Page<AuditLog> getAuditLogsByDateRange(LocalDateTime start, LocalDateTime end, Pageable pageable);
